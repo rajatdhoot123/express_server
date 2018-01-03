@@ -1,6 +1,9 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router();
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const multer = require('multer');
+
+const upload = multer({ dest: 'uploads/'})
 
 const Product = require('../models/products')
 
@@ -33,12 +36,11 @@ router.get('/',(req, res, next) => {
 	})
 })
 
-router.post('/', (req, res, next) => {
-	console.log("in Post")
-  const product = new Product({
+router.post('/', upload.single('productImage'), (req, res, next) => {
+   	const product = new Product({
     _id: new mongoose.Types.ObjectId(),
     name: req.body.name,
-    price: req.body.price
+    price: req.body.price,
   });
   product
     .save()
