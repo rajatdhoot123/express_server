@@ -18,6 +18,7 @@ mongoose.connect("mongodb://nodeserverapp:"+ process.env.MONGO_ATLAS_PW +"@nodes
 );
 
 app.use(morgan('dev'))
+app.use('/uploads', express.static('uploads'))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(bodyParser.json());
 
