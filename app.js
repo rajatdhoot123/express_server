@@ -5,8 +5,9 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
 //Routes which should handle request
-const productRoutes = require('./api/routes/products')
-const orderRoutes = require('./api/routes/orders')
+const productRoutes = require('./api/routes/products');
+const orderRoutes = require('./api/routes/orders');
+const userRoutes = require('./api/routes/user')
 
 mongoose.connect("mongodb://nodeserverapp:"+ process.env.MONGO_ATLAS_PW +"@nodeserverapp-shard-00-00-vhaax.mongodb.net:27017,nodeserverapp-shard-00-01-vhaax.mongodb.net:27017,nodeserverapp-shard-00-02-vhaax.mongodb.net:27017/test?ssl=true&replicaSet=nodeServerApp-shard-0&authSource=admin",
 	function(err) {
@@ -34,6 +35,7 @@ app.use((req, res, next) => {
 
 app.use('/products', productRoutes)
 app.use('/orders', orderRoutes)
+app.use('/user', userRoutes)
 
 app.use((req, res, next) => {
 	const error = new Error('Not Found')
